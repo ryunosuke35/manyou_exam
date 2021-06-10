@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+
+<p>task:<%= @task.name %></p>
+<p>content:<%= @task.content %></p>
+
+<%= link_to '編集', edit_task_path(@task.id) %>
+<%= link_to '一覧へ戻る', tasks_path %>
