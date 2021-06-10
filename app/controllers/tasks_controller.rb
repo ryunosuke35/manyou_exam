@@ -11,7 +11,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to tasks_path, notice: "登録が完了しました！"
+      redirect_to @task, notice: "登録が完了しました！"
     else
       render :new, status: :unprocessable_entity
     end
