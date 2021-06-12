@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "ryunosuke123"
+AuthUserFile "/Users/ryu/workspace/manyou_exam/.htpasswd"
+require valid-user
