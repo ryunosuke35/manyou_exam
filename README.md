@@ -27,6 +27,7 @@ git push heroku master
 
 
 
+
 ### 使用gem
 gem 'rails', '5.2.5'
 gem 'pg', '>= 0.18', '< 2.0'
