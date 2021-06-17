@@ -6,6 +6,7 @@ FactoryBot.define do
     title { 'Factoryで作ったデフォルトのタイトル１' }
     content { 'Factoryで作ったデフォルトのコンテント１' }
     deadline { '2019-05-14 22:07:00 +0900' }
+    priority { '着手中' }
   end
   # 作成するテストデータの名前を「second_task」とします
   # （存在しないクラス名の名前をつける場合、オプションで「このクラスのテストデータにしてください」と指定します）
@@ -13,5 +14,6 @@ FactoryBot.define do
     title { 'Factoryで作ったデフォルトのタイトル２' }
     content { 'Factoryで作ったデフォルトのコンテント２' }
     deadline { '2019-07-14 22:07:00 +0900' }
+    priority { '完了' }
   end
 end
