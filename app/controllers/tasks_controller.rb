@@ -1,8 +1,10 @@
 class TasksController < ApplicationController
 
   def index
-    if params[:sort_expired].present?
+    if params[:sort_deadline].present?
       @task = Task.all.deadline
+    elsif params[:sort_priority].present?
+      @task = Task.all.priority
     elsif params[:ambiguous].present? && params[:status].present?
       @task = Task.ambiguous(params[:ambiguous]).status(params[:status])
     elsif params[:ambiguous].present?
@@ -56,7 +58,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    @task = params.require(:task).permit(:title, :content, :deadline, :status)
+    @task = params.require(:task).permit(:title, :content, :deadline, :status, :priority)
   end
 
 end
