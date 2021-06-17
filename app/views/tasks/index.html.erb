@@ -1,5 +1,14 @@
 <h2>一覧</h2>
 <p id="notice"><%= notice %></p><br>
+
+<%= form_with(url:tasks_path, local: true, method: :get) do |form| %>
+  <%= form.text_field :ambiguous, placeholder:"何かお探しですか？" %>
+  <%= form.select :priority, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択してください" %>
+  <%= form.submit "検索する" %>
+<% end %>
+
+
+
   <table>
     <thead>
       <tr>
@@ -16,6 +25,7 @@
           <td><%= task.title %></td>
           <td><%= task.content %></td>
           <td><%= task.deadline %></td>
+          <td><%= task.priority %></td>
           <td><%= link_to '詳細', task_path(task.id) %></td>
           <td><%= link_to '編集', edit_task_path(task.id) %></td>
           <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
