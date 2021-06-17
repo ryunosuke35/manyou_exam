@@ -43,20 +43,20 @@ describe 'タスク管理機能', type: :system do
     end
     context 'ステータスで検索した場合' do
       it '検索したステータスを含むタスクが表示される' do
-        task = FactoryBot.create(:task, priority: '未着手')
+        task = FactoryBot.create(:task, status: '未着手')
         visit tasks_path
-        select '未着手', from: 'priority'
+        select '未着手', from: 'status'
         click_on '検索する'
         expect(all('tbody tr')[0]).to have_content '未着手'
       end
     end
     context 'タイトルとステータスの両方で検索した場合' do
       it 'タイトルとステータスの両方を含むタスクが表示される' do
-        task = FactoryBot.create(:task, title: '洗濯をする', priority: '完了')
-        task = FactoryBot.create(:task, title: '洗濯物を干す', priority: '未着手')
+        task = FactoryBot.create(:task, title: '洗濯をする', status: '完了')
+        task = FactoryBot.create(:task, title: '洗濯物を干す', status: '未着手')
         visit tasks_path
         fill_in 'ambiguous', with: '洗濯'
-        select '未着手', from: 'priority'
+        select '未着手', from: 'status'
         click_on '検索する'
         expect(page).not_to have_content 'Factoryで作ったデフォルトのタイトル'
         expect(all('tbody tr')[0]).not_to have_content '完了'
@@ -77,7 +77,7 @@ describe 'タスク管理機能', type: :system do
         select 14, from: 'task_deadline_3i'
         select 22, from: 'task_deadline_4i'
         select "07", from: 'task_deadline_5i'
-        select '未着手', from: 'task_priority'
+        select '未着手', from: 'task_status'
 
         click_on '登録する'
         visit tasks_path

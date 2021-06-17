@@ -4,6 +4,6 @@ class Task < ApplicationRecord
 
   scope :deadline, -> { order(deadline: "ASC") }
   scope :created_at, -> { order(created_at: "DESC") }
-  scope :priority, ->(priority) { where(priority: priority) }
+  scope :status, ->(status) { where(status: status) }
   scope :ambiguous, ->(ambiguous) { where("title LIKE ?", "%#{ambiguous}%") }
 end

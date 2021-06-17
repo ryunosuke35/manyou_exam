@@ -26,8 +26,8 @@
         <td><%= form.datetime_select :deadline %></td>
       </tr>
       <tr>
-        <td><%= form.label :priority %></td>
-        <td><%= form.select :priority, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択してください" %></td>
+        <td><%= form.label :status %></td>
+        <td><%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択してください" %></td>
       </tr>
     </table>
   </div>
