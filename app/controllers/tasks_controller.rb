@@ -14,6 +14,7 @@ class TasksController < ApplicationController
     else
       @task = Task.all.created_at
     end
+    @task = @task.page(params[:page]).per(5)
   end
 
   def new
