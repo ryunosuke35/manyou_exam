@@ -4,7 +4,7 @@ class TasksController < ApplicationController
     if params[:sort_deadline].present?
       @task = Task.all.deadline
     elsif params[:sort_priority].present?
-      @task = Task.all.priority
+      @task = Task.priority
     elsif params[:ambiguous].present? && params[:status].present?
       @task = Task.ambiguous(params[:ambiguous]).status(params[:status])
     elsif params[:ambiguous].present?
