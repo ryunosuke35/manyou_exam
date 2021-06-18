@@ -24,18 +24,18 @@ describe 'タスク管理機能', type: :system do
     end
     context '終了期限でソートするリンクを押した場合' do
       it '期限の近いタスクが一番上に表示される' do
-        task = FactoryBot.create(:task, deadline: '2019-06-14 22:07:00 +0900')
+        task = FactoryBot.create(:task, deadline: '2019-06-14 22:07:00')
         visit tasks_path
-        click_link '終了期限でソートする'
+        click_link '終了期限'
         sleep 1
-        expect(all('tbody tr')[0]).to have_content '2019-05-14 22:07:00 +0900'
+        expect(all('tbody tr')[0]).to have_content '2019-05-14 22:07:00'
       end
     end
     context '優先順位でソートするリンクを押した場合' do
       it '優先順位の高いタスクが一番上に表示される' do
         task = FactoryBot.create(:task, priority: '中')
         visit tasks_path
-        click_link '優先順位でソートする'
+        click_link '優先順位'
         sleep 1
         expect(all('tbody tr')[0]).to have_content '高'
       end
