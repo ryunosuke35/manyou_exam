@@ -21,10 +21,22 @@
         <td><%= form.label :content %></td>
         <td><%= form.text_area :content %></td>
       </tr>
+      <tr>
+        <td><%= form.label :deadline %></td>
+        <td><%= form.datetime_select :deadline %></td>
+      </tr>
+      <tr>
+        <td><%= form.label :status %></td>
+        <td><%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択してください" %></td>
+      </tr>
+      <tr>
+        <td><%= form.label :priority %></td>
+        <td><%= form.select :priority, [["高", "高"], ["中", "中"], ["低", "低"]], include_blank: "選択してください" %></td>
+      </tr>
     </table>
   </div>
 
   <div class="actions">
-    <%= form.submit "登録する" %>
+    <%= form.submit "登録する", class: 'btn btn-default' %>
   </div>
 <% end %>

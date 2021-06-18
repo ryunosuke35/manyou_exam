@@ -1,8 +1,7 @@
 require 'rails_helper'
 describe 'タスク管理機能', type: :system do
-  
+
   before do
-    # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
     FactoryBot.create(:task)
     FactoryBot.create(:second_task)
   end
@@ -11,61 +10,104 @@ describe 'タスク管理機能', type: :system do
   describe '一覧表示機能' do
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
-        # テストで使用するためのタスクを作成
         task = FactoryBot.create(:task, title: 'task')
-        # タスク一覧ページに遷移
         visit tasks_path
-
-        # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
-        # have_contentされているか（含まれているか）ということをexpectする（確認・期待する）
-        expect(page).to have_content 'task'
-        # expectの結果が true ならテスト成功、false なら失敗として結果が出力される
       end
     end
-    # テスト内容を追加で記載する
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
-        # ここに実装する
         task = FactoryBot.create(:task, title: 'task', content: 'task_content')
         visit tasks_path
         expect(all('tbody tr')[0]).to have_content 'task'
         expect(all('tbody tr')[0]).to have_content 'task_content'
       end
     end
-  end
-
-  describe '新規作成機能' do
-    context 'タスクを新規作成した場合' do
-      it '作成したタスクが表示される' do
-        # 1. new_task_pathに遷移する（新規作成ページに遷移する）
-        visit new_task_path
-        # 2. 新規登録内容を入力する
-        #「タスク名」というラベル名の入力欄と、「タスク詳細」というラベル名の入力欄にタスクのタイトルと内容をそれぞれ入力する
-        # ここに「タスク名」というラベル名の入力欄に内容をfill_in（入力）する処理を書く
-        fill_in 'task_title', with: 'task_title'
-        # ここに「タスク詳細」というラベル名の入力欄に内容をfill_in（入力）する処理を書く
-        fill_in 'task_content', with: 'task_content'
-        # 3. 「登録する」というvalue（表記文字）のあるボタンをクリックする
-        # ここに「登録する」というvalue（表記文字）のあるボタンをclick_onする（クリックする）する処理を書く
-        click_on '登録する'
-        # 4. clickで登録されたはずの情報が、タスク詳細ページに表示されているかを確認する
-        # （タスクが登録されたらタスク詳細画面に遷移されるという前提）
-        # ここにタスク詳細ページに、テストコードで作成したデータがタスク詳細画面にhave_contentされているか（含まれているか）を確認（期待）するコードを書く
-        expect(page).to have_content 'task_title'
-        expect(page).to have_content 'task_content'
+    context '終了期限でソートするリンクを押した場合' do
+      it '期限の近いタスクが一番上に表示される' do
+        task = FactoryBot.create(:task, deadline: '2019-06-14 22:07:00')
+        visit tasks_path
+        click_link '終了期限'
+        sleep 1
+        expect(all('tbody tr')[0]).to have_content '2019-05-14 22:07:00'
+      end
+    end
+    context '優先順位でソートするリンクを押した場合' do
+      it '優先順位の高いタスクが一番上に表示される' do
+        task = FactoryBot.create(:task, priority: '中')
+        visit tasks_path
+        click_link '優先順位'
+        sleep 1
+        expect(all('tbody tr')[0]).to have_content '高'
+      end
+    end
+    context 'タイトルであいまい検索をした場合' do
+      it '検索した内容を含むタスクが表示される' do
+        task = FactoryBot.create(:task, title: '洗濯をする')
+        visit tasks_path
+        fill_in 'ambiguous', with: '洗濯'
+        click_on '検索する'
+        expect(page).to have_content '洗濯'
+        expect(page).not_to have_content 'Factoryで作ったデフォルトのタイトル'
+      end
+    end
+    context 'ステータスで検索した場合' do
+      it '検索したステータスを含むタスクが表示される' do
+        task = FactoryBot.create(:task, status: '未着手')
+        visit tasks_path
+        select '未着手', from: 'status'
+        click_on '検索する'
+        expect(all('tbody tr')[0]).to have_content '未着手'
+      end
+    end
+    context 'タイトルとステータスの両方で検索した場合' do
+      it 'タイトルとステータスの両方を含むタスクが表示される' do
+        task = FactoryBot.create(:task, title: '洗濯をする', status: '完了')
+        task = FactoryBot.create(:task, title: '洗濯物を干す', status: '未着手')
+        visit tasks_path
+        fill_in 'ambiguous', with: '洗濯'
+        select '未着手', from: 'status'
+        click_on '検索する'
+        expect(page).not_to have_content 'Factoryで作ったデフォルトのタイトル'
+        expect(all('tbody tr')[0]).not_to have_content '完了'
+        expect(all('tbody tr')[0]).not_to have_content '着手中'
       end
     end
   end
 
-  describe '詳細表示機能' do
-     context '任意のタスク詳細画面に遷移した場合' do
-       it '該当タスクの内容が表示される' do
-         task = FactoryBot.create(:task, title: 'task' ,content: 'task_content')
-         visit task_path(task.id)
-         expect(page).to have_content 'task'
-         expect(page).to have_content 'task_content'
-       end
-     end
+
+  describe '新規作成機能' do
+    context 'タスクを新規作成した場合' do
+      it '作成したタスク・終了期限・ステータスが表示される' do
+        visit new_task_path
+        fill_in 'task_title', with: 'task_title'
+        fill_in 'task_content', with: 'task_content'
+        select 2019, from: 'task_deadline_1i'
+        select 5, from: 'task_deadline_2i'
+        select 14, from: 'task_deadline_3i'
+        select 22, from: 'task_deadline_4i'
+        select "07", from: 'task_deadline_5i'
+        select '未着手', from: 'task_status'
+
+        click_on '登録する'
+        visit tasks_path
+
+        expect(page).to have_content 'task_title'
+        expect(page).to have_content 'task_content'
+        expect(page).to have_content '2019-05-14 22:07:00'
+        expect(page).to have_content '未着手'
+      end
+    end
   end
 
+
+  describe '詳細表示機能' do
+    context '任意のタスク詳細画面に遷移した場合' do
+      it '該当タスクの内容が表示される' do
+      task = FactoryBot.create(:task, title: 'task' ,content: 'task_content')
+      visit task_path(task.id)
+      expect(page).to have_content 'task'
+      expect(page).to have_content 'task_content'
+      end
+    end
+  end
 end
