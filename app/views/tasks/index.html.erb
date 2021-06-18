@@ -12,8 +12,8 @@
   <table>
     <thead>
       <tr>
-        <td>title</td>
-        <td>content</td>
+        <td>タイトル</td>
+        <td>内容</td>
       </tr>
     </thead>
 
@@ -25,7 +25,7 @@
         <tr>
           <td><%= task.title %></td>
           <td><%= task.content %></td>
-          <td><%= task.deadline %></td>
+          <td><%= task.deadline.strftime("%Y-%m-%d %H:%M:%S") %></td>
           <td><%= task.status %></td>
           <td><%= task.priority %></td>
           <td><%= link_to '詳細', task_path(task.id) %></td>
