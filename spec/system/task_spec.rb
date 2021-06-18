@@ -31,6 +31,15 @@ describe 'タスク管理機能', type: :system do
         expect(all('tbody tr')[0]).to have_content '2019-05-14 22:07:00 +0900'
       end
     end
+    context '優先順位でソートするリンクを押した場合' do
+      it '優先順位の高いタスクが一番上に表示される' do
+        task = FactoryBot.create(:task, priority: '中')
+        visit tasks_path
+        click_link '優先順位でソートする'
+        sleep 1
+        expect(all('tbody tr')[0]).to have_content '高'
+      end
+    end
     context 'タイトルであいまい検索をした場合' do
       it '検索した内容を含むタスクが表示される' do
         task = FactoryBot.create(:task, title: '洗濯をする')
@@ -101,5 +110,4 @@ describe 'タスク管理機能', type: :system do
       end
     end
   end
-
 end
