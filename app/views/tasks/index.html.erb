@@ -14,13 +14,13 @@
       <tr>
         <td>タイトル</td>
         <td>内容</td>
+        <td><%= link_to "終了期限", tasks_path(sort_deadline: "true") %></td>
+        <td>ステータス</td>
+        <td><%= link_to "優先順位", tasks_path(sort_priority: "true") %></td>
       </tr>
     </thead>
 
     <tbody>
-      <%= link_to "終了期限でソートする", tasks_path(sort_deadline: "true") %>
-      <%= link_to "優先順位でソートする", tasks_path(sort_priority: "true") %>
-
       <% @task.each do |task| %>
         <tr>
           <td><%= task.title %></td>
@@ -28,13 +28,13 @@
           <td><%= task.deadline.strftime("%Y-%m-%d %H:%M:%S") %></td>
           <td><%= task.status %></td>
           <td><%= task.priority %></td>
-          <td><%= link_to '詳細', task_path(task.id) %></td>
-          <td><%= link_to '編集', edit_task_path(task.id) %></td>
-          <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+          <td><%= link_to '詳細', task_path(task.id), class: 'btn btn-primary' %></td>
+          <td><%= link_to '編集', edit_task_path(task.id), class: 'btn btn-warning' %></td>
+          <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 
-  <%= link_to '新規登録', new_task_path %>
+  <%= link_to '新規登録', new_task_path, class: 'btn btn-default' %>
   <%= paginate @task %>

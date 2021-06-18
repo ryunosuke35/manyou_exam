@@ -27,7 +27,7 @@
       </tr>
       <tr>
         <td><%= form.label :status %></td>
-        <td><%= form.select :status, [["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択してください" %></td>
+        <td><%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択してください" %></td>
       </tr>
       <tr>
         <td><%= form.label :priority %></td>
@@ -37,6 +37,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "登録する" %>
+    <%= form.submit "登録する", class: 'btn btn-default' %>
   </div>
 <% end %>

@@ -1,5 +1,8 @@
 {
   "name": "manyou_exam",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "3",
+    "jquery": "^3.6.0"
+  }
 }
