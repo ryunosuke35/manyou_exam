@@ -2,17 +2,17 @@ class TasksController < ApplicationController
 
   def index
     if params[:sort_deadline].present?
-      @task = Task.all.deadline
+      @task = current_user.tasks.deadline
     elsif params[:sort_priority].present?
-      @task = Task.priority
+      @task = current_user.tasks.priority
     elsif params[:ambiguous].present? && params[:status].present?
-      @task = Task.ambiguous(params[:ambiguous]).status(params[:status])
+      @task = current_user.tasks.ambiguous(params[:ambiguous]).status(params[:status])
     elsif params[:ambiguous].present?
-      @task = Task.ambiguous(params[:ambiguous])
+      @task = current_user.tasks.ambiguous(params[:ambiguous])
     elsif params[:status].present?
-      @task = Task.status(params[:status])
+      @task = current_user.tasks.status(params[:status])
     else
-      @task = Task.all.created_at
+      @task = current_user.tasks.created_at
     end
     @task = @task.page(params[:page]).per(5)
   end
@@ -23,6 +23,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task.user_id = current_user.id
     if @task.save
       redirect_to @task, notice: "登録が完了しました！"
     else
