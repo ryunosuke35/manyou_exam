@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <td></td>
       <td>id</td>
       <td>名前</td>
       <td>email</td>
@@ -13,6 +14,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.admin %></td>
         <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td><%= user.email %></td>

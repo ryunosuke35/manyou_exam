@@ -28,6 +28,10 @@
       <td><%= form.label :確認用パスワード %></td>
       <td><%= form.password_field :password_confirmation %></td>
     </tr>
+    <tr>
+      <td><%= form.label :admin %></td>
+      <td><%= form.select :admin, [["管理者", "true"], ["一般", "false"]], include_blank: "選択してください" %></td>
+    </tr>
     <tr></tr>
   </table>
   <%= form.submit "アカウントを作成する" %>

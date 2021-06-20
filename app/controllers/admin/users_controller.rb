@@ -1,5 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :admin_required
 
   def index
     @users = User.all
@@ -34,6 +35,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
+
     @user.destroy
     redirect_to admin_users_path, notice: "削除が完了しました！"
   end
@@ -41,10 +43,12 @@ class Admin::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
   def set_user
     @user = User.find(params[:id])
   end
-
+  def admin_required
+    redirect_to tasks_path, notice: "管理者権限がありません！" unless current_user.admin
+  end
 end

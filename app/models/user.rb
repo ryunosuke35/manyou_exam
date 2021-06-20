@@ -6,5 +6,20 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
 
+
+  after_destroy :admin_necessary
+  after_update :admin_necessary
+
   has_many :tasks, dependent: :destroy
+
+
+
+  def admin_necessary
+    if User.where(admin: 'true').count == 0
+      raise ActiveRecord::Rollback
+    end
+  end
+
+
+
 end
