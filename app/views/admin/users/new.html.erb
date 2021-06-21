@@ -1,0 +1,38 @@
+<h2>新規登録</h2>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= @user.errors.count %> 件のエラーがあります</h2>
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: @user, local: true, url: admin_users_path) do |form| %>
+  <table>
+    <tr>
+      <td><%= form.label :名前 %></td>
+      <td><%= form.text_field :name %></td>
+    </tr>
+    <tr>
+      <td><%= form.label :メールアドレス %></td>
+      <td><%= form.email_field :email %></td>
+    </tr>
+    <tr>
+      <td><%= form.label :パスワード %></td>
+      <td><%= form.password_field :password %></td>
+    </tr>
+    <tr>
+      <td><%= form.label :確認用パスワード %></td>
+      <td><%= form.password_field :password_confirmation %></td>
+    </tr>
+    <tr>
+      <td><%= form.label :admin %></td>
+      <td><%= form.select :admin, [["管理者", "true"], ["一般", "false"]], include_blank: "選択してください" %></td>
+    </tr>
+    <tr></tr>
+  </table>
+  <%= form.submit "アカウントを作成する" %>
+<% end %>

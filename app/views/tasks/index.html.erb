@@ -1,7 +1,5 @@
 <h2>一覧</h2>
 
-<p id="notice"><%= notice %></p><br>
-
 <%= form_with(url:tasks_path, local: true, method: :get) do |form| %>
   <%= form.text_field :ambiguous, placeholder:"何かお探しですか？" %>
   <%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択してください" %>
