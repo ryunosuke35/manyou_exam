@@ -3,6 +3,9 @@
 <%= form_with(url:tasks_path, local: true, method: :get) do |form| %>
   <%= form.text_field :ambiguous, placeholder:"何かお探しですか？" %>
   <%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択してください" %>
+  <%= form.select("label_id", Label.pluck(:name, :id), { include_blank: '選択してください' }) %>
+
+
   <%= form.submit "検索する" %>
 <% end %>
 
@@ -29,6 +32,13 @@
           <td><%= link_to '詳細', task_path(task.id), class: 'btn btn-primary' %></td>
           <td><%= link_to '編集', edit_task_path(task.id), class: 'btn btn-warning' %></td>
           <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %></td>
+          <td>
+            <% task.labels.each do |label| %>
+            <%= label.name %>
+            <% end %>
+          </td>
+
+
         </tr>
       <% end %>
     </tbody>

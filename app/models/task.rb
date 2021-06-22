@@ -10,6 +10,9 @@ class Task < ApplicationRecord
   scope :status, ->(status) { where(status: status) }
   scope :ambiguous, ->(ambiguous) { where("title LIKE ?", "%#{ambiguous}%") }
 
+  # scope :label_ids, ->(label_ids) { where(labels: { id: label_ids }) }
+
+
   enum priority: { 高: 0, 中: 1, 低: 2 }
 
   belongs_to :user

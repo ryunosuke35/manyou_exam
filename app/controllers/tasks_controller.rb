@@ -11,10 +11,12 @@ class TasksController < ApplicationController
       @task = current_user.tasks.ambiguous(params[:ambiguous])
     elsif params[:status].present?
       @task = current_user.tasks.status(params[:status])
+    elsif params[:label_id].present?
+      @task = current_user.tasks.joins(:labels).where(labels: { id: params[:label_id] })
     else
       @task = current_user.tasks.created_at
     end
-    @task = @task.page(params[:page]).per(5)
+    @task = @task.page(params[:page]).per(8)
   end
 
   def new
@@ -60,7 +62,12 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    @task = params.require(:task).permit(:title, :content, :deadline, :status, :priority)
+    @task = params.require(:task).permit(:title, :content, :deadline, :status, :priority, label_ids: [])
   end
 
 end
+
+
+
+
+# .permit(:task, { ids: [] }

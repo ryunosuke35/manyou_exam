@@ -33,3 +33,14 @@ Task.create(
     admin:'false'
   )
 end
+
+
+Label.create(
+  name: "ラベル1"
+)
+
+(2..5).each do |n|
+  Label.create(
+    name: "ラベル#{n}"
+  )
+end
