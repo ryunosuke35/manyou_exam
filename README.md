@@ -1,7 +1,7 @@
-<!-- ### モデル名 Task -->
+### モデル名 Task
 
 | カラム名 | データ型 |
-| ---- | ---- |
+| :---: | :---: |
 | title | string |
 | content | text |
 | task_deadline | datetime |
@@ -20,16 +20,16 @@
 
 
 ### デプロイの方法
-git add .
-git commit -m "[変更内容を記述]"
-git push heroku master
+git add .  
+git commit -m "[変更内容を記述]"  
+git push heroku master  
 
 
 
 
 
 ### 使用gem
-gem 'rails', '5.2.5'
+gem 'rails', '5.2.5'  
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
