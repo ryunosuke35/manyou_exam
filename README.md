@@ -1,12 +1,12 @@
 ### モデル名 Task
 
-        |  カラム名  |  データ型  |
+        | カラム名 | データ型 |
         | ---- | ---- | ---- |
-        |  title  |  string  |
-        |  content  |  text  |
-        |  task_deadline  |  datetime  |
-        |  status  |  integer  |
-        |  priority  |  integer  |
+        | title | string |
+        | content | text |
+        | task_deadline | datetime |
+        | status | integer |
+        | priority | integer |
 
 
 ### モデル名 User           
