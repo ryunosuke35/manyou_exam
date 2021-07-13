@@ -1,4 +1,4 @@
-### モデル名 Task
+<!-- ### モデル名 Task -->
 
 | カラム名 | データ型 |
 | ---- | ---- | ---- |
@@ -9,7 +9,7 @@
 | priority | integer |
 
 
-### モデル名 User           
+<!-- ### モデル名 User
 
         |  カラム名  |  データ型  |
         |:---|:---|:---|
@@ -62,4 +62,4 @@ group :test do
   gem 'webdrivers'
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] -->
