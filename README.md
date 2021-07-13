@@ -21,7 +21,6 @@
 
 ### デプロイの方法
 git add .
-
 git commit -m "[変更内容を記述]"<br>
 git push heroku master <br>
 
