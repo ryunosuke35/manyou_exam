@@ -1,7 +1,7 @@
 <!-- ### モデル名 Task -->
 
 | カラム名 | データ型 |
-| ---- | ---- | ---- |
+| ---- | ---- |
 | title | string |
 | content | text |
 | task_deadline | datetime |
