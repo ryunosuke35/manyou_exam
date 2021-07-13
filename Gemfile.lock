@@ -42,7 +42,7 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.7.0)
+    addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     arel (9.0.0)
     bcrypt (3.1.16)
@@ -125,11 +125,6 @@ GEM
     nio4r (2.5.7)
     nokogiri (1.11.7)
       mini_portile2 (~> 2.5.0)
-<<<<<<< HEAD
-      racc (~> 1.4)
-    nokogiri (1.11.7-x86_64-darwin)
-=======
->>>>>>> bcbb86067abb84aa7eba1494d818d9f77305a45c
       racc (~> 1.4)
     pg (1.2.3)
     pry (0.13.1)
@@ -172,7 +167,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
-    rake (13.0.3)
+    rake (13.0.6)
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -195,7 +190,7 @@ GEM
       rspec-support (~> 3.9.0)
     rspec-support (3.9.4)
     ruby_dep (1.5.0)
-    rubyzip (2.3.0)
+    rubyzip (2.3.2)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -248,10 +243,6 @@ GEM
 
 PLATFORMS
   ruby
-<<<<<<< HEAD
-  x86_64-darwin-20
-=======
->>>>>>> bcbb86067abb84aa7eba1494d818d9f77305a45c
 
 DEPENDENCIES
   bcrypt
