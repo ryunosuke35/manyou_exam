@@ -11,11 +11,11 @@
 
 ### モデル名 User
 
-        |  カラム名  |  データ型  |
-        | :---: | :---: |
-        |  name  |  string  |
-        |  email  |  string  |
-        |  password_digest  |  text  |
+| カラム名 | データ型 |
+| :---: | :---: |
+| name | string |
+| email | string |
+| password_digest | text |
 
 
 
