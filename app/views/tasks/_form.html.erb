@@ -34,7 +34,9 @@
         <td><%= form.select :priority, [["高", "高"], ["中", "中"], ["低", "低"]], include_blank: "選択してください" %></td>
       </tr>
     </table>
+    <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
   </div>
+
 
   <div class="actions">
     <%= form.submit "登録する", class: 'btn btn-default' %>

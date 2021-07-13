@@ -1,6 +1,11 @@
 
 <p>task:<%= @task.title %></p>
 <p>content:<%= @task.content %></p>
+<p>
+  <% @task.labels.each do |label| %>
+  <%= label.name %>
+  <% end %>
+</p>
 
 <%= link_to '編集', edit_task_path(@task.id), class: 'btn btn-default' %>
 <%= link_to '一覧へ戻る', tasks_path, class: 'btn btn-default' %>
